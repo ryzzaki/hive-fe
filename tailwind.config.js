@@ -27,6 +27,11 @@ module.exports = {
   darkMode: 'class',
   content: ['./src/pages/**/*.{js,jsx,ts,tsx}', './src/components/**/*.{js,jsx,ts,tsx}'],
   theme: {
+    fontFamily: {
+      main: ['IBMPlexSans-Regular', 'sans-serif'],
+      bold: ['IBMPlexSans-Bold', 'sans-serif'],
+      roboto: ['Roboto', 'sans-serif'],
+    },
     extend: {
       scale: scales,
       spacing: sizes,
@@ -36,7 +41,7 @@ module.exports = {
       minHeight: sizes,
       minWidth: sizes,
       colors: {
-        offwhite: { DEFAULT: '#f7eed5' },
+        black: { DEFAULT: '#1F1F1F' },
       },
       animation: {
         'spin-slow': 'spin 5s linear infinite',

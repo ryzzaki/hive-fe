@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: IBMPlexSans-Regular;
+  font-display: swap;
+  src: url('../fonts/IBMPlexSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: IBMPlexSans-Bold;
+  font-display: swap;
+  src: url('../fonts/IBMPlexSans-Bold.ttf') format('truetype');
+}

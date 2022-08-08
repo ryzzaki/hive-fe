@@ -1,7 +1,9 @@
 import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import Countdown from 'react-countdown';
+import toast from 'react-hot-toast';
 import ClockRenderer from '../components/clockRenderer';
+import TabSlider from '../components/tabSlider';
 
 const HomePage: NextPage = () => {
   // default value has to be at least 1 - otherwise the component bugs out probably due to SSR
@@ -10,10 +12,18 @@ const HomePage: NextPage = () => {
   const [autostart, setAutostart] = useState(false);
   const [hasBeenPaused, setHasBeenPaused] = useState(false);
 
+  const setPomoTimer = (isEven: boolean, triggerToast: boolean) => {
+    if (triggerToast) {
+      toast(isEven ? 'Pomo Time!' : 'Break Time!', { icon: isEven ? '🐝' : '💪' });
+    }
+    setTime(Date.now() + 1000 + (isEven ? 0.2 : 0.1) * 60 * 1000);
+  };
+
   // set the time using useEffect to sync the timer client side
   useEffect(() => {
+    const isEven = sessionIndex % 2 === 0;
     // there is a bug, gotta offset it with 1000ms
-    setTime(Date.now() + 1000 + 25 * 60 * 1000);
+    setPomoTimer(isEven, false);
   }, []);
 
   const handleOnStart = () => {
@@ -24,10 +34,14 @@ const HomePage: NextPage = () => {
   };
 
   const handleOnComplete = () => {
-    // send http request
-    setTime(Date.now() + 1000 + 9000);
-    setAutostart(!autostart);
-    setSessionIndex(sessionIndex + 1);
+    const incrementedSessionIndex = sessionIndex + 1 > 3 ? 0 : sessionIndex + 1;
+    const isEven = incrementedSessionIndex % 2 === 0;
+    // send http request if isEven
+    setPomoTimer(isEven, true);
+    if (!autostart) {
+      setAutostart(true);
+    }
+    setSessionIndex(incrementedSessionIndex);
   };
 
   return (
@@ -46,13 +60,11 @@ const HomePage: NextPage = () => {
           onPause={() => setHasBeenPaused(true)}
         />
       </div>
-      <div className="flex justify-center items-center pt-4rem space-x-1rem">
-        <div>Pomo</div>
-        <div>Break</div>
-        <div>Pomo</div>
-        <div>Break</div>
+      <TabSlider index={sessionIndex} />
+      <div className="flex justify-center items-center pt-4rem text-18">
+        0 / 4 <span className="font-bold text-amber-500 px-5">$BEE</span>
+        rewards earned today!
       </div>
-      <div className="flex justify-center items-center pt-4rem">0 / 4 $BEE rewards earned today!</div>
     </div>
   );
 };
