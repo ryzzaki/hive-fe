@@ -9,7 +9,6 @@ import TabSlider from '../components/tabSlider';
 import WalletContext from '../utils/context/WalletContext';
 import getSessionsToday from '../api/getSessionsToday';
 import { AxiosError } from 'axios';
-import getSessions from '../api/getSessions';
 import Table from '../components/table';
 
 const HomePage: NextPage = () => {
