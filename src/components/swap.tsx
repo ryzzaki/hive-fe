@@ -71,11 +71,13 @@ const Swap: React.FC<SwapProps> = ({ showModal, setShowModal }) => {
   };
 
   const handleSwap = async () => {
-    if (!beeContract) {
+    if (!managerContract) {
       return toast('Bee Token Contract Failed Initialization!', { icon: '❌' });
     }
     try {
-      const txHash = await beeContract.convictionBurn(ethers.utils.parseUnits(String(beeAmount), 'ether').toString());
+      const txHash = await managerContract.convictionBurn(
+        ethers.utils.parseUnits(String(beeAmount), 'ether').toString()
+      );
       await txHash.wait();
       toast('$BEE has been swapped!', { icon: '🎉' });
     } catch (e: any) {
