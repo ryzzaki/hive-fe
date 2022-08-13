@@ -125,7 +125,7 @@ const Swap: React.FC<SwapProps> = ({ showModal, setShowModal }) => {
               <input
                 className="rounded-md bg-black border border-gray-300 px-1rem py-10 my-1rem w-full md:w-350"
                 readOnly={true}
-                value={hiveAmount}
+                value={`${hiveAmount} $HIVE`}
               />
               <div className="flex space-x-20 w-full pt-10">
                 <Button variation="secondary" className="px-15" onClick={handleApproval}>
