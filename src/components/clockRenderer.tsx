@@ -24,7 +24,7 @@ const ClockRenderer: React.FC<ClockRendererProps> = ({ minutes, seconds, api }) 
 
   return (
     <div className="flex flex-col items-center justify-center w-full mx-auto pt-4rem pb-2rem">
-      <div className="flex text-70 font-bold">
+      <div className="flex text-70 md:text-120 font-bold">
         <div>{zeroPad(minutes)}</div>
         <div>:</div>
         <div>{zeroPad(seconds)}</div>

@@ -43,7 +43,7 @@ const HomePage: NextPage = () => {
 
   const handleOnStart = async () => {
     if (!wallet) {
-      return;
+      return toast("You're using Hive without wallet connection!", { icon: '❌' });
     }
     try {
       const isEven = sessionIndex % 2 === 0;
@@ -77,20 +77,18 @@ const HomePage: NextPage = () => {
   };
 
   return (
-    <div className="flex flex-col">
-      <div>
-        <Countdown
-          key={sessionIndex}
-          date={time}
-          precision={3}
-          autoStart={autostart}
-          zeroPadDays={2}
-          zeroPadTime={2}
-          renderer={(props) => ClockRenderer(props)}
-          onStart={handleOnStart}
-          onComplete={handleOnComplete}
-        />
-      </div>
+    <div className="flex flex-col max-w-300 md:max-w-500 w-full">
+      <Countdown
+        key={sessionIndex}
+        date={time}
+        precision={3}
+        autoStart={autostart}
+        zeroPadDays={2}
+        zeroPadTime={2}
+        renderer={(props) => ClockRenderer(props)}
+        onStart={handleOnStart}
+        onComplete={handleOnComplete}
+      />
       <TabSlider index={sessionIndex} />
       <div className="flex justify-center items-center pt-4rem text-18">
         {sessionRewards} / 4 <span className="font-bold text-amber-500 px-5">$BEE</span>

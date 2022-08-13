@@ -21,7 +21,7 @@ const Table: React.FC<TableProps> = ({ sessionIndex }) => {
   }, [sessionIndex, wallet]);
 
   return (
-    <div className="mt-3rem py-2rem w-500">
+    <div className="mt-3rem py-2rem md:max-w-500">
       <div className="py-10 font-bold">Rewards Earned Already</div>
       <div className="flex justify-between pb-10">
         <div className="flex space-x-10">
