@@ -74,9 +74,13 @@ const HomePage: NextPage = () => {
     const incrementedSessionIndex = sessionIndex + 1 > 3 ? 0 : sessionIndex + 1;
     const isEven = incrementedSessionIndex % 2 === 0;
     if (!isEven) {
-      completeSession(wallet).then((isSuccessful) =>
-        toast(isSuccessful ? 'Rewards sent!' : 'No reward sent!', { icon: isSuccessful ? '⚡️' : '❌' })
-      );
+      completeSession(wallet)
+        .then((isSuccessful) =>
+          toast(isSuccessful ? 'Rewards sent!' : 'No reward sent!', { icon: isSuccessful ? '⚡️' : '❌' })
+        )
+        .catch((_e) => {
+          toast('Server error! Failed to send rewards!', { icon: '❌' });
+        });
     }
     setPomoTimer(isEven, true);
     if (!autostart) {
