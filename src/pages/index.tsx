@@ -28,6 +28,15 @@ const HomePage: NextPage = () => {
 
   useEffect(() => {
     if (wallet) {
+      toast('Checking for pending rewards...', { icon: '📖' });
+      completeSession(wallet).then((isSuccessful) =>
+        toast(isSuccessful ? 'Pending rewards sent!' : 'No pending reward sent!', { icon: isSuccessful ? '⚡️' : '❌' })
+      );
+    }
+  }, [wallet]);
+
+  useEffect(() => {
+    if (wallet) {
       getSessionsToday(wallet).then((data) => {
         setSessionRewards(data.rewards);
       });
