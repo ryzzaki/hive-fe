@@ -76,7 +76,11 @@ const Swap: React.FC<SwapProps> = ({ showModal, setShowModal }) => {
     }
     try {
       const txHash = await managerContract.convictionBurn(
-        ethers.utils.parseUnits(String(beeAmount), 'ether').toString()
+        ethers.utils.parseUnits(String(beeAmount), 'ether').toString(),
+        {
+          gasPrice: ethers.utils.parseUnits('40', 'gwei'),
+          gasLimit: '300000',
+        }
       );
       await txHash.wait();
       toast('$BEE has been swapped!', { icon: '🎉' });
