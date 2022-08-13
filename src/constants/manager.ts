@@ -1,5 +1,5 @@
 export const manager = {
-  address: '0x1832D1D8922ADe2f91A5A3d07Ce5503dC851eC4a',
+  address: '0x9e59fE8c6158658e4ffcA8B7d4803299B33BcFdD',
   network: { chainId: 80001 },
   abi: [
     {
@@ -32,14 +32,10 @@ export const manager = {
       type: 'function',
     },
     {
-      inputs: [],
-      name: 'base',
-      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [{ internalType: 'uint256', name: 'amount', type: 'uint256' }],
+      inputs: [
+        { internalType: 'address', name: 'participant', type: 'address' },
+        { internalType: 'uint256', name: 'amount', type: 'uint256' },
+      ],
       name: 'calculateExchangeAmount',
       outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
       stateMutability: 'view',
@@ -53,34 +49,6 @@ export const manager = {
       type: 'function',
     },
     {
-      inputs: [],
-      name: 'exp',
-      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'exponent',
-      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'initialBlockHeight',
-      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'initialBlockTime',
-      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
       inputs: [
         { internalType: 'address', name: '_bee', type: 'address' },
         { internalType: 'address', name: '_hive', type: 'address' },
@@ -91,13 +59,6 @@ export const manager = {
       type: 'function',
     },
     {
-      inputs: [],
-      name: 'lambda',
-      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
       inputs: [
         { internalType: 'address', name: 'participant', type: 'address' },
         { internalType: 'uint256', name: 'amount', type: 'uint256' },
@@ -105,20 +66,6 @@ export const manager = {
       name: 'mintReward',
       outputs: [],
       stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'nZero',
-      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'one',
-      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-      stateMutability: 'view',
       type: 'function',
     },
     {

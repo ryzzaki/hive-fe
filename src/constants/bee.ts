@@ -1,5 +1,5 @@
 export const bee = {
-  address: '0x61b1c85dA8845aa0499aB07730C61D00d0833E16',
+  address: '0x191FbF1ed0eE2C371A9e79C57C687B050E5BfaB5',
   network: { chainId: 80001 },
   abi: [
     {
