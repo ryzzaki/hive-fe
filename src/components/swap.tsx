@@ -36,13 +36,12 @@ const Swap: React.FC<SwapProps> = ({ showModal, setShowModal }) => {
   }, [wallet]);
 
   useEffect(() => {
-    if (managerContract) {
-      // managerContract
-      //   .calculateExchangeAmount(ethers.utils.parseUnits(String(beeAmount), 'ether').toString())
-      //   .then((result: any) => {
-      //     console.log(result);
-      //     setHiveAmount(Number(ethers.utils.formatEther(result)));
-      //   });
+    if (managerContract && wallet) {
+      managerContract
+        .calculateExchangeAmount(wallet, ethers.utils.parseUnits(String(beeAmount), 'ether').toString())
+        .then((result: any) => {
+          setHiveAmount(Number(ethers.utils.formatEther(result)));
+        });
     }
   }, [managerContract]);
 
