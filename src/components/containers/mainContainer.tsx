@@ -7,7 +7,7 @@ type MainContainerProps = {
 };
 
 const MainContainer: React.FC<MainContainerProps> = ({ children }) => (
-  <div className="font-main w-full transition bg-black text-white">
+  <div className="font-main w-full transition bg-black text-white px-20">
     <Toaster
       position="top-right"
       toastOptions={{

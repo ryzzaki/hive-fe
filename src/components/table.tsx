@@ -38,7 +38,7 @@ const Table: React.FC<TableProps> = ({ sessionIndex }) => {
           sessions.map((s, i) => (
             <div key={i} className="flex space-x-1rem justify-between">
               <div>{new Date(s.createdAt).toISOString().split('T')[0]}</div>
-              <div>{s.amount ?? 0} $BEE</div>
+              <div>{s.amount ? s.amount : 0} $BEE</div>
             </div>
           ))
         ) : (

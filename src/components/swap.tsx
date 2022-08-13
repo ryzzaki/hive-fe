@@ -19,6 +19,7 @@ const Swap: React.FC<SwapProps> = ({ showModal, setShowModal }) => {
   const [beeContract, setBeeContract] = useState<ethers.Contract | undefined>(undefined);
   const [beeAmount, setBeeAmount] = useState(50);
   const [hiveAmount, setHiveAmount] = useState(0);
+  const [beeBalance, setBeeBalance] = useState(0);
 
   useEffect(() => {
     isCorrectNetwork().then((isCorrect) => {
@@ -36,6 +37,14 @@ const Swap: React.FC<SwapProps> = ({ showModal, setShowModal }) => {
   }, [wallet]);
 
   useEffect(() => {
+    if (beeContract && wallet) {
+      beeContract.balanceOf(wallet).then((result: any) => {
+        setBeeBalance(Number(ethers.utils.formatEther(result)));
+      });
+    }
+  }, [beeContract, wallet]);
+
+  useEffect(() => {
     if (managerContract && wallet) {
       managerContract
         .calculateExchangeAmount(wallet, ethers.utils.parseUnits(String(beeAmount), 'ether').toString())
@@ -43,7 +52,7 @@ const Swap: React.FC<SwapProps> = ({ showModal, setShowModal }) => {
           setHiveAmount(Number(ethers.utils.formatEther(result)));
         });
     }
-  }, [managerContract]);
+  }, [managerContract, wallet]);
 
   const handleApproval = async () => {
     if (!beeContract) {
@@ -74,11 +83,22 @@ const Swap: React.FC<SwapProps> = ({ showModal, setShowModal }) => {
     }
   };
 
+  const handleInputChange = (value: string | undefined) => {
+    if (managerContract) {
+      setBeeAmount(Number(value));
+      managerContract
+        .calculateExchangeAmount(wallet, ethers.utils.parseUnits(String(value ? value : 0), 'ether').toString())
+        .then((result: any) => {
+          setHiveAmount(Number(ethers.utils.formatEther(result)));
+        });
+    }
+  };
+
   return (
     <>
       {showModal && (
-        <div className="flex fixed inset-0 z-30 bg-opacity-70 bg-black">
-          <div className="flex flex-col py-2rem px-3rem m-5rem bg-black rounded-md border border-gray-500 mx-auto shadow-lg max-h-450 md:max-h-400">
+        <div className="flex fixed inset-0 z-30 bg-opacity-70 bg-black mx-10">
+          <div className="flex flex-col py-2rem px-3rem m-5rem bg-black rounded-md border border-gray-500 mx-auto shadow-lg max-h-[480px] md:max-h-450">
             <div className="flex justify-between font-bold text-gray-300 pb-10">
               <div>Swap $BEE for $HIVE</div>
               <div className="px-7 rounded-full bg-white text-black cursor-pointer" onClick={() => setShowModal(false)}>
@@ -89,11 +109,17 @@ const Swap: React.FC<SwapProps> = ({ showModal, setShowModal }) => {
               Burn your BEE tokens to acquire the HIVE governance tokens to participate in the decision making and well
               being of the protocol.
             </div>
+            <div className="flex justify-between pt-1rem">
+              Your balance:{' '}
+              <span className="font-bold">
+                {beeBalance} <span className="text-amber-500">$BEE</span>
+              </span>
+            </div>
             <div className="flex flex-col items-center">
               <input
                 className="rounded-md bg-black border border-gray-300 px-1rem py-10 my-1rem w-full md:w-350"
                 placeholder="50 $BEE"
-                onChange={(e) => setBeeAmount(Number(e.target.value))}
+                onChange={(e) => handleInputChange(e.target.value)}
               />
               <ArrowIcon className="animate-bounce" />
               <input
