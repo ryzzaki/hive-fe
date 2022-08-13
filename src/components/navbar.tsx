@@ -47,6 +47,17 @@ const Navbar: React.FC<NavbarProps> = () => {
     }
   };
 
+  const NavbarItems = () => (
+    <>
+      <Button variation="primary" onClick={() => setShowModal(true)}>
+        Swap Token
+      </Button>
+      <Button variation="secondary" onClick={handleConnect}>
+        {!wallet ? 'Connect Wallet' : `${wallet.slice(0, 5)}...${wallet.slice(wallet.length - 4, wallet.length)}`}
+      </Button>
+    </>
+  );
+
   return (
     <>
       <nav className="flex justify-between sticky top-10 z-10 max-w-1200 w-full mx-auto p-20 rounded-lg border border-gray-400/30 backdrop-blur-sm bg-gray-400/30 shadow-md">
@@ -55,12 +66,7 @@ const Navbar: React.FC<NavbarProps> = () => {
           <div>Hive Protocol</div>
         </div>
         <div className="hidden md:flex space-x-2rem">
-          <Button variation="primary" onClick={() => setShowModal(true)}>
-            Swap Token
-          </Button>
-          <Button variation="secondary" onClick={handleConnect}>
-            {!wallet ? 'Connect Wallet' : 'Connected'}
-          </Button>
+          <NavbarItems />
         </div>
         <div className="flex md:hidden">
           <div className="p-8 bg-amber-500 rounded-md" onClick={() => setShowBurger(!showBurger)}>
@@ -68,12 +74,7 @@ const Navbar: React.FC<NavbarProps> = () => {
           </div>
           {showBurger && (
             <div className="flex flex-col absolute inset-0 top-[5.5rem] space-y-1rem rounded-lg border border-amber-500 bg-black shadow-md px-20 pt-3rem pb-10rem">
-              <Button variation="primary" onClick={() => setShowModal(true)}>
-                Swap Token
-              </Button>
-              <Button variation="secondary" onClick={handleConnect}>
-                {!wallet ? 'Connect Wallet' : 'Connected'}
-              </Button>
+              <NavbarItems />
             </div>
           )}
         </div>

@@ -103,6 +103,9 @@ const HomePage: NextPage = () => {
         {sessionRewards} / 4 <span className="font-bold text-amber-500 px-5">$BEE</span>
         rewards earned today!
       </div>
+      <div className="flex justify-center py-1rem text-gray-400">
+        {wallet && `Connected Wallet: ${wallet.slice(0, 5)}...${wallet.slice(wallet.length - 4, wallet.length)}`}
+      </div>
       <Table sessionIndex={sessionIndex} />
     </div>
   );
