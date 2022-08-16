@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  assetPrefix: process.env.NODE_ENV === 'production' ? './' : undefined,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
